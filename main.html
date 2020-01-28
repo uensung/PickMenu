@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PickMenu</title>
+    <link href="./css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <div>DinningTogether Main</div>
+    <div>아이스크림 디자인팀 회식 웹</div>
+    <div id="locationArea" class="locationArea">
+      <select id="typeSelectBar" class="typeSelectBar selectBar">
+        <option value="restaurant">1차 밥집</option>
+        <option value="pub">2차 술집</option>
+      </select>
+      <select id="restaurantSectctBar" class="restaurantSectctBar selectBar">
+      </select>
+      <select id="pubSectctBar" class="pubSectctBar selectBar">
+      </select><br>
+      <iframe id="viewFrame" src="https://blog.naver.com/reviewhomme/221081045052" width="1500" height="700"></iframe>
+    </div>
+
+    <div class="area-input">
+      <span id="inputUserName"></span>
+      <input id="inputFirstDate"  type="text" placeholder="가능날짜1"/>
+      <input id="inputSecondDate" type="text" placeholder="가능날짜2"/>
+      <span>1차</span>
+      <select id="inputRestaurantSectctBar"></select>
+      <span>2차</span>
+      <select id="inputPubSectctBar"></select>
+      <button id="inputSubmit" type="button">제출</button>
+    </div>
+
+    <div id="resultArea">
+    </div>
+
+    <div id="resultEl" style="display:none;">
+      <span id="resultUserName" class="result-data">1</span>
+      <span id="resultFirstDate" class="result-data">2</span>
+      <span id="resultSecondDate" class="result-data">3</span>
+      <span>1차</span>
+      <span id="resultRestaurantSectctBar" class="result-data">4</span>
+      <span>2차</span>
+      <span id="resultPubSectctBar" class="result-data">5</span>
+    </div>
+
+    <div id="displayArea" class="displayArea">
+      <p>******* notice *******</p>
+      <p>> 회식장소 선정에 참여하지 않거나 2개이상 중복된 장소가 없을 경우</p>
+      <p>김문경 주임이 원하는 임의의 회식 장소가 결정됩니다!</p>
+      <p>원하는 곳에서 즐거운 회식을 위하여 꼭 선정에 참여해주시고 2개이상의 중복장소가 나오도록 의견을 모아주세요!</p>
+      <p>> 1차위치와 2차위치의 거리가 표시됩니다.</p>
+      <p>빠른 이동을 위해 비교적 가까운 거리의 장소를 선택해주세요</p>
+      <p>> 로그인 인증로직은 개발하지 않았습니다.</p>
+      <p>다른사람의 이름으로 들어와 장소를 변경하지 말아주세요</p>
+      <p>> 최종 회식장소는 다수결에 의해 결정 후 이메일로 공지드립니다.</p>
+      <p>> 업체사정으로 인해 임의의 장소로 변경될 경우 이메일로 공지 드립니다.</p>
+    </div>
+    <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+    <script type="text/javascript" src="./js/jquery.2.1.3.min.js"></script>
+    <script type="text/javascript" src="./js/gsheet.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+  </body>
+</html>

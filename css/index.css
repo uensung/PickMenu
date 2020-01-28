@@ -1,0 +1,43 @@
+body {
+  background-color: #F3E3DC;
+}
+
+.area-index {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 700px;
+  height: 650px;
+}
+
+.area-index-img {
+  width: 600px;
+  margin: 0px auto;
+}
+
+.area-login-btn {
+  width: 600px;
+  margin: 0px auto;
+  text-align: center;
+}
+
+.btn-google-login {
+  cursor: pointer;
+  background-color: #df4a32;
+  margin-top: 16px;
+  width: 220px;
+  height: 37px;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: 0;
+  border: 0;
+}
+
+.btn-google-login:hover {
+  background-color: #f18371;
+}

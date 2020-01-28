@@ -1,0 +1,43 @@
+.locationArea {
+  width: 1600px;
+  height: 800px;
+  border: 1px solid black;
+}
+
+.restaurantSectctBar {
+  display: block;
+}
+
+.pubSectctBar {
+  display: none;
+}
+
+.selectBar {
+  float: left;
+}
+
+.selectArea {
+  float: left;
+}
+
+.displayArea {
+  width: 550px;
+  height: 400px;
+  float: left;
+  border: 1px solid black;
+  margin-left: 150px;
+  margin-top: 20px;
+}
+
+.userArea {
+  opacity : 0.5;
+}
+
+.result-data {
+  display: inline-block;
+  width: 200px;
+}
+
+.area-input {
+  margin-bottom: 20px;
+}

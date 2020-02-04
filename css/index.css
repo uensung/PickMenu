@@ -26,18 +26,20 @@ body {
 
 .btn-google-login {
   cursor: pointer;
-  background-color: #df4a32;
+  background-color: #ff0022;
   margin-top: 16px;
-  width: 220px;
-  height: 37px;
+  width: 410px;
+  height: 70px;
   vertical-align: middle;
+  border-radius: 35px;
   color: #fff;
-  font-size: 15px;
+  font-size: 20px;
   box-sizing: border-box;
   outline: 0;
   border: 0;
+  margin:0px 44px 0px 44px;
 }
 
 .btn-google-login:hover {
-  background-color: #f18371;
+  background-color: #c20000;
 }

@@ -1,14 +1,35 @@
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.area-main-header {
+  padding: 15px;
+  background: #e74c3c;
+  color: white;
+  min-width: 1000px;
+}
+
+.area-title {
+  font-size: 40px;
+  font-family: Lato, Arial;
+}
+
 .locationArea {
   width: 1600px;
   height: 800px;
   border: 1px solid black;
 }
 
-.restaurantSectctBar {
+.restaurantSelectBar {
   display: block;
 }
 
-.pubSectctBar {
+#pubSelectBarWrapper {
+  display: none;
+}
+
+.pubSelectBar {
   display: none;
 }
 
@@ -40,4 +61,70 @@
 
 .area-input {
   margin-bottom: 20px;
+}
+
+
+
+
+
+/* 셀렉트 박스 */
+.select-hidden {
+  display: none;
+  visibility: hidden;
+  padding-right: 10px;
+}
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  color: #fff;
+  width: 235px;
+  height: 40px;
+}
+.select-styled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #c0392b;
+  padding: 8px 15px;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.select-styled:hover {
+  background-color: #b83729;
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #ab3326;
+}
+
+.select-options li {
+  margin: 0;
+  padding: 12px 0;
+  text-indent: 15px;
+  border-top: 1px solid #962d22;
+  -moz-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+  -webkit-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in;
+}
+
+.select-options li:hover {
+  color: #c0392b;
+  background: #fff;
 }

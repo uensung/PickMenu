@@ -1,6 +1,6 @@
 var typeSelectBar       = document.getElementById('typeSelectBar');
-var restaurantSectctBar = document.getElementById('restaurantSectctBar');
-var pupSectctBar        = document.getElementById('pubSectctBar');
+var restaurantSelectBar = document.getElementById('restaurantSelectBar');
+var pupSelectBar        = document.getElementById('pubSelectBar');
 var viewFrame           = document.getElementById('viewFrame');
 var userAreaList        = document.getElementsByClassName('userArea');
 
@@ -8,8 +8,8 @@ var userID;
 var userName;
 
 var inputUserName            = document.getElementById('inputUserName');
-var inputRestaurantSectctBar = document.getElementById('inputRestaurantSectctBar');
-var inputPubSectctBar        = document.getElementById('inputPubSectctBar');
+var inputRestaurantSelectBar = document.getElementById('inputRestaurantSelectBar');
+var inputPubSelectBar        = document.getElementById('inputPubSelectBar');
 var inputFirstDate           = document.getElementById('inputFirstDate');
 var inputSecondDate          = document.getElementById('inputSecondDate');
 var inputSubmit              = document.getElementById('inputSubmit');
@@ -37,43 +37,19 @@ function initClient() {
   }).then(function() {
     if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
       window.location = "/PickMenu";
-    }  
+    }
 
     userID   = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail();
     userName = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName();
 
-    console.error('userID', userID);
-    console.error('userName', userName);
-
-    getLocationSheet('1869778460', restaurantSectctBar);
-    getLocationSheet('1585030241', pubSectctBar);
+    setStyleSelectBox('typeSelectBar');
+    getLocationSheet('1869778460', restaurantSelectBar);
+    getLocationSheet('1585030241', pubSelectBar);
     getUserSheet('1887373853');
   });
 }
 
 handleClientLoad();
-
-typeSelectBar.addEventListener('change', function() {
-  if(this.value == 'restaurant') {
-    restaurantSectctBar.style.display = "block";
-    pubSectctBar.style.display        = "none";
-    restaurantSectctBar.value = restaurantSectctBar.children[0].value
-    viewFrame.src = restaurantSectctBar.children[0].title;
-  } else {
-    restaurantSectctBar.style.display = "none";
-    pubSectctBar.style.display        = "block";
-    pupSectctBar.value = pubSectctBar.children[0].value;
-    viewFrame.src = pubSectctBar.children[0].title;
-  }
-});
-
-restaurantSectctBar.addEventListener('change', function() {
-  viewFrame.src = document.getElementById(this.value).title;
-});
-
-pupSectctBar.addEventListener('change', function() {
-  viewFrame.src = document.getElementById(this.value).title;
-});
 
 function getLocationSheet(id, target){
   gsheet.query({
@@ -92,12 +68,14 @@ function getLocationSheet(id, target){
         target.appendChild(optionEl.cloneNode(true));
 
         // input 변경 select bar 설정
-        if(target.id == "restaurantSectctBar") {
-          inputRestaurantSectctBar.appendChild(optionEl.cloneNode(true));
+        if(target.id == "restaurantSelectBar") {
+          inputRestaurantSelectBar.appendChild(optionEl.cloneNode(true));
         } else {
-          inputPubSectctBar.appendChild(optionEl.cloneNode(true));
+          inputPubSelectBar.appendChild(optionEl.cloneNode(true));
         }
       }
+
+      setStyleSelectBox(target.id);
     }
   });
 };
@@ -113,8 +91,8 @@ function getUserSheet(id){
         tempEl.querySelector('#resultUserName').innerHTML = contentData[i].A;
         tempEl.querySelector('#resultFirstDate').innerHTML = contentData[i].B;
         tempEl.querySelector('#resultSecondDate').innerHTML = contentData[i].C;
-        tempEl.querySelector('#resultRestaurantSectctBar').innerHTML = contentData[i].D;
-        tempEl.querySelector('#resultPubSectctBar').innerHTML = contentData[i].E;
+        tempEl.querySelector('#resultRestaurantSelectBar').innerHTML = contentData[i].D;
+        tempEl.querySelector('#resultPubSelectBar').innerHTML = contentData[i].E;
         resultArea.appendChild(tempEl);
       }
     }
@@ -122,7 +100,7 @@ function getUserSheet(id){
 };
 
 inputSubmit.addEventListener('click', function() {
-  insertSheet(userName, inputFirstDate.value, inputSecondDate.value, inputRestaurantSectctBar.value, inputPubSectctBar.value);
+  insertSheet(userName, inputFirstDate.value, inputSecondDate.value, inputRestaurantSelectBar.value, inputPubSelectBar.value);
 })
 
 function insertSheet(name, firstDate, secondDate, place1, place2) {
@@ -131,7 +109,6 @@ function insertSheet(name, firstDate, secondDate, place1, place2) {
     gid: 1887373853,
     sql : "SELECT A",
     callback : function(contentData){
-      console.error('insert get sheet', contentData);
       for(var i=0; i<contentData.length; i++) {
         if(contentData[i].A == name) {
           rangeNum = i + 1;
@@ -165,4 +142,84 @@ function insertSheet(name, firstDate, secondDate, place1, place2) {
       });
     }
   });
+}
+
+function setStyleSelectBox(id) {
+  $('#' + id).each(function(){
+    var $this = $(this), numberOfOptions = $(this).children('option').length;
+    $this.addClass('select-hidden');
+    $this.wrap('<div id="' + id + 'Wrapper" class="select"></div>');
+    $this.after('<div class="select-styled" tabIndex="0"></div>');
+
+    var mouseEnterState = false;
+
+    var $styledSelect = $this.next('div.select-styled');
+    $styledSelect.text($this.children('option').eq(0).text());
+
+    var $list = $('<ul />', {
+      'class': 'select-options'
+    }).insertAfter($styledSelect);
+
+    for (var i = 0; i < numberOfOptions; i++) {
+      $('<li />', {
+        text: $this.children('option').eq(i).text(),
+        rel: $this.children('option').eq(i).val(),
+        title : $this.children('option').eq(i).attr('title'),
+        selectId : id
+      }).appendTo($list);
+    }
+
+    var $listItems = $list.children('li');
+
+    $styledSelect.on('click', function(e) {
+      e.stopPropagation();
+      $('div.select-styled.active').not(this).each(function(){
+        $(this).removeClass('active').next('ul.select-options').hide();
+      });
+      $(this).toggleClass('active').next('ul.select-options').toggle();
+    });
+
+    $listItems.on('mouseover', function() {
+      mouseEnterState = true;
+    });
+
+    $listItems.on('mouseleave', function() {
+      mouseEnterState = false;
+    });
+
+    $styledSelect.on('blur', function(e) {
+      if(mouseEnterState) {
+        return;
+      }
+      $styledSelect.removeClass('active');
+      $list.hide();
+    });
+
+    $listItems.click(function(e) {
+      e.stopPropagation();
+      $styledSelect.text($(this).text()).removeClass('active');
+      $this.val($(this).attr('rel'));
+      $list.hide();
+
+      if($(this).attr('selectId') == "typeSelectBar") {
+        changeTypeSelectBar($(this).attr('rel'));
+      } else if($(this).attr('selectId') == "restaurantSelectBar" || $(this).attr('selectId') == "pubSelectBar") {
+        viewFrame.src = $(this).attr('title');
+      }
+    });
+  });
+}
+
+function changeTypeSelectBar(value) {
+  if(value == 'restaurant') {
+    restaurantSelectBar.parentElement.style.display = "inline-block";
+    pubSelectBar.parentElement.style.display        = "none";
+    restaurantSelectBar.value = restaurantSelectBar.children[0].value
+    viewFrame.src = restaurantSelectBar.children[0].title;
+  } else {
+    restaurantSelectBar.parentElement.style.display = "none";
+    pubSelectBar.parentElement.style.display        = "inline-block";
+    pupSelectBar.value = pubSelectBar.children[0].value;
+    viewFrame.src = pubSelectBar.children[0].title;
+  }
 }

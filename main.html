@@ -6,16 +6,18 @@
     <link href="./css/main.css" rel="stylesheet">
   </head>
   <body>
-    <div>DinningTogether Main</div>
-    <div>아이스크림 디자인팀 회식 웹</div>
+    <header class="area-main-header">
+      <div class="area-title">PickMenu</div>
+      <div>아이스크림 디자인팀 회식 웹</div>
+    </header>
     <div id="locationArea" class="locationArea">
       <select id="typeSelectBar" class="typeSelectBar selectBar">
         <option value="restaurant">1차 밥집</option>
         <option value="pub">2차 술집</option>
       </select>
-      <select id="restaurantSectctBar" class="restaurantSectctBar selectBar">
+      <select id="restaurantSelectBar" class="restaurantSelectBar selectBar">
       </select>
-      <select id="pubSectctBar" class="pubSectctBar selectBar">
+      <select id="pubSelectBar" class="pubSelectBar selectBar">
       </select><br>
       <iframe id="viewFrame" src="https://blog.naver.com/reviewhomme/221081045052" width="1500" height="700"></iframe>
     </div>
@@ -25,9 +27,9 @@
       <input id="inputFirstDate"  type="text" placeholder="가능날짜1"/>
       <input id="inputSecondDate" type="text" placeholder="가능날짜2"/>
       <span>1차</span>
-      <select id="inputRestaurantSectctBar"></select>
+      <select id="inputRestaurantSelectBar"></select>
       <span>2차</span>
-      <select id="inputPubSectctBar"></select>
+      <select id="inputPubSelectBar"></select>
       <button id="inputSubmit" type="button">제출</button>
     </div>
 
@@ -39,9 +41,9 @@
       <span id="resultFirstDate" class="result-data">2</span>
       <span id="resultSecondDate" class="result-data">3</span>
       <span>1차</span>
-      <span id="resultRestaurantSectctBar" class="result-data">4</span>
+      <span id="resultRestaurantSelectBar" class="result-data">4</span>
       <span>2차</span>
-      <span id="resultPubSectctBar" class="result-data">5</span>
+      <span id="resultPubSelectBar" class="result-data">5</span>
     </div>
 
     <div id="displayArea" class="displayArea">
